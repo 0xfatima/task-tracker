@@ -35,7 +35,7 @@ const getTasks = async(req, res) =>{
         );
 
         //Status summary counts
-        const allTasks = await task.countDocuments(
+        const allTasks = await Task.countDocuments(
             req.user.role === "admin"?{}:{assignedTo:req.user._id}
         )
 

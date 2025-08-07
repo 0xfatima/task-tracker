@@ -12,10 +12,10 @@ const protect = async (req, res, next)=>{
             req.user = await User.findById(decoded.id).select("-password");
             next();
         }else{
-            res.Status(401).json({message:"Not authorized, no token"})
+            res.status(401).json({message:"Not authorized, no token"})
         }
     }catch(error){
-        res.Status(401).json({message: "Token failed", error: error.message})
+        res.status(401).json({message: "Token failed", error: error.message})
     }
 }
 
@@ -25,7 +25,7 @@ const adminOnly = (req, res, next)=>{
     if(req.user && req.user.role=="admin"){
         next();
     }else{
-        res.Status(403).json({message:"Access denied, admin only"})
+        res.status(403).json({message:"Access denied, admin only"})
     }
 }
 
