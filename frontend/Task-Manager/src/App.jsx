@@ -11,6 +11,7 @@ import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import PrivateRoute from './routes/PrivateRoute'
 import UserProvider, { UserContext } from './context/userContext'
+import { Toaster } from 'react-hot-toast'
 const App = () => {
 
   return (
@@ -49,6 +50,13 @@ const App = () => {
       </Router>
 
     </div>
+    <Toaster
+    toastOptions={{
+      className:"",
+      style:{
+        fontSize:"13px"
+      },
+    }}/>
     </UserProvider>
   )
 }

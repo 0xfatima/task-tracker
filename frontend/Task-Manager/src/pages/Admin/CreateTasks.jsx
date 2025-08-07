@@ -55,12 +55,68 @@ const CreateTasks = () => {
 
 
   //create Task
-  const createTask = async ()=>{}
+  const createTask = async ()=>{
+    setLoading(true)
+
+    try{
+      const todolist = taskData.todoChecklist?.map((item)=>({
+        text:item,
+        completed:false
+      }));
+
+      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK,{
+        ...taskData,
+        dueDate: new Date(taskData.dueDate).toISOString(),
+        todoChecklist:todolist
+      });
+      toast.success("Task created successfully");
+      clearData();
+    }catch(error){
+      console.error("error craeting task", error)
+      setLoading(false)
+    }finally{
+      setLoading(false)
+    }
+
+  }
 
     //update Task
   const updateTask = async ()=>{}
 
-  const handleSubmit = async ()=>{}
+  const handleSubmit = async ()=>{
+
+    setError(null)
+
+    //input validation
+
+    if(!taskData.title.trim()){
+      setError("Title is required.")
+      return
+    }
+    if(!taskData.description.trim()){
+      setError("Description is required.")
+      return
+    }
+    if(!taskData.dueDate){
+      setError("Due date is required.")
+      return
+    }
+    if(!taskData.title.trim()){
+      setError("Descriptionis required.")
+      return
+    }
+    if(taskData.todoChecklist?.length===0){
+      setError("Add atleast one todo task.")
+      return
+    }
+
+    if(taskId){
+      updateTask()
+      return
+    }
+
+    createTask();
+  }
 
   //get task info by id
   const getTaskDetailsByID = async()=>{}
@@ -137,6 +193,25 @@ const CreateTasks = () => {
   todoList = {taskData?.todoChecklist}
   setTodoList ={(value)=>handleValueChange("todoChecklist", value)}/>
   
+</div>
+
+{error && (
+<p className='text-xs font-medium text-red-500 mt-5'>
+  {error}
+</p>
+
+)}
+
+<div className='flex justify-end mt-7'>
+<button
+className='add-btn'
+onClick={handleSubmit}
+disabled={loading}
+
+>
+
+  {taskId?"UPDATE TASK": "CREATE TASK"}
+</button>
 </div>
           </div>
         </div>

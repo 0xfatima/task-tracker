@@ -115,7 +115,7 @@ setBarChartData(PriorityLevelData)
         </div>
 
           <div>
-            <div className='card' style={{ height: 300 }}>
+            <div className='card' style={{ height: 400 }}>
               <div className='flex items-center justify-between'>
                 <h5 className='font-medium'>
                 Task Distribution
