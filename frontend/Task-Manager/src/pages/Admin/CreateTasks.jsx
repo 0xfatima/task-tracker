@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../components/layouts/DashboardLayout'
 import { PRIORITY_DATA } from '../../utils/data'
 import axiosInstance from '../../utils/axiosInstance'
@@ -9,7 +9,8 @@ import moment from "moment"
 import {LuTrash2} from "react-icons/lu"
 import SelectDropdown from '../../components/Inputs/SelectDropdown'
 import TodoListInput from '../../components/Inputs/TodoListInput'
-
+import Modal from '../../components/layouts/Modals'
+import DeleteAlert from '../../components/layouts/DeleteAlert'
 const CreateTasks = () => {
 
   const location = useLocation();
@@ -81,7 +82,34 @@ const CreateTasks = () => {
   }
 
     //update Task
-  const updateTask = async ()=>{}
+  const updateTask = async ()=>{
+    setLoading(true)
+    try{
+      const todolist = taskData.todoChecklist?.map((item)=>{
+        const prevTodoChecklist = currentTask?.todoChecklist||[]
+        const matchedTask = prevTodoChecklist.find((task)=>task.text== item)
+
+        return{
+          text:item,
+          completed:matchedTask? matchedTask.completed:false,
+        };
+      });
+      const response = await axiosInstance.put(
+        API_PATHS.TASKS.UPDATE_TASK(taskId),
+        {
+          ...taskData,
+          dueDate: new Date(taskData.dueDate).toISOString(),
+          todoChecklist:todolist,
+        }
+      );
+      toast.success("Task Updated Successfully");
+    }catch(error){
+      console.error("Error creating task:", error);
+      setLoading(false);
+    }finally{
+      setLoading(false)
+    }
+  }
 
   const handleSubmit = async ()=>{
 
@@ -119,9 +147,51 @@ const CreateTasks = () => {
   }
 
   //get task info by id
-  const getTaskDetailsByID = async()=>{}
+  const getTaskDetailsByID = async()=>{
+      try{
+        const response = await axiosInstance.get(
+          API_PATHS.TASKS.GET_TASK_BY_ID(taskId)
+        );
+        if(response.data){
+          const taskInfo = response.data;
+          setCurrentTask(taskInfo);
+          setTaskData((prevState)=>({
+            title:taskInfo.title,
+            description:taskInfo.description,
+            priority:taskInfo.priority,
+            dueDate:taskInfo.dueDate?moment(taskInfo.dueDate).format("YYYY-MM-DD"):null,
+            todoChecklist:
+            taskInfo?.todoChecklist?.map((item)=>item?.text)||[]
 
-  const deleteTask = ()=>{}
+          }))
+        }
+      }catch(error){
+        console.error("Error fetching users", error )
+      }
+  }
+
+  const deleteTask = async ()=>{
+    try{
+      await axiosInstance.delete(API_PATHS.TASKS.DELETE_TASK(taskId));
+
+      setOpenDeleteAlert(false);
+      toast.success("details deleted successfully")
+      navigate("/admin/tasks")
+    }catch(error){
+      console.error(
+        "Error deleting expense",
+        error.reponse?.data?.message|| error.message
+      );
+    }
+  }
+
+useEffect(()=>{
+  if(taskId){
+    getTaskDetailsByID(taskId)
+  }
+
+  return ()=>{}
+},[taskId])
 
 
   return (
@@ -217,6 +287,14 @@ disabled={loading}
         </div>
       </div>
 
+<Modal
+isOpen={openDeleteAlert}
+onClose={()=>setOpenDeleteAlert(false)}
+title="Delete Task">
+  <DeleteAlert
+  content="Are you sure you want to delete this task?"
+  onDelete={()=>deleteTask()}/>
+</Modal>
     </DashboardLayout>
   )
 }

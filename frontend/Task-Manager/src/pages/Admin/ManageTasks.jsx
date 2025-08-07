@@ -4,6 +4,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
 import TaskStatusTabs from '../../components/layouts/TaskStatusTabs'
+import TaskCard from '../../components/Cards/TaskCard';
 const ManageTasks = () => {
   const [allTasks, setAllTasks] =  useState([]);
   const [tabs, setTabs] = useState([]);
@@ -37,7 +38,7 @@ const ManageTasks = () => {
 };
 
 
-  const handlClick =(taskData) =>{
+  const handleClick =(taskData) =>{
     navigate(`/admin/create-task`, {state:{taskId:taskData._id}});
   };
 
@@ -57,7 +58,7 @@ const ManageTasks = () => {
           
         </div>
 
-        {allTasks?.length > 0 && (
+        {tabs?.[0]?.count > 0 && (
             <div className="flex items-center gap-3">
               <TaskStatusTabs
               tabs={tabs}
@@ -67,6 +68,26 @@ const ManageTasks = () => {
 
             </div>
           )}
+
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4'>
+            {allTasks?.map((item, index)=>(
+            <TaskCard
+            key={item._id}
+            title={item.title}
+            description= {item.description}
+            priority={item.priority}
+            status={item.status}
+            progress = {item.progress}
+            createdAt = {item.createdAt}
+            dueDate = {item.dueDate}
+            completedTodoCount={item.completedTodoCount || 0}
+            todoChecklist={item.todoChecklist||[]}
+            onClick={()=>{
+              handleClick(item);
+            }}/>
+            
+          ))}
+          </div>
       </div>
     </DashboardLayout>
   )
