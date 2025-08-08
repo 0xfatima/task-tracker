@@ -22,11 +22,9 @@ const registerUser = async (req, res) => {
         }
 
         //determine suer role: admin if correct token is provided, otherwise, member    
-        let role = "member"
+        let role = "admin"
 
-        if(adminInviteToken && adminInviteToken == process.env.ADMIN_INVITE_TOKEN){
-            role = "admin"
-        }
+        
 
         //hash password
         const salt = await bcrypt.genSalt(10);
