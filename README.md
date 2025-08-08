@@ -72,7 +72,7 @@ cp .env.example .env  # Provide your own MongoDB URI and JWT secret
 
 npm install
 npm run dev
-This will start the backend server on http://localhost:5000.
+This will start the backend server on http://localhost:8000.
 
 3. Frontend Setup
 cd frontend/Task-Manager
