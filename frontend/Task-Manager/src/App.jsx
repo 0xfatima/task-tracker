@@ -4,9 +4,6 @@ import Dashboard from './pages/Admin/Dashboard'
 import ManageTasks from './pages/Admin/ManageTasks'
 import CreateTask from './pages/Admin/CreateTasks'
 import ManageUsers from './pages/Admin/ManageUsers'
-import MyTasks from './pages/User/MyTasks'
-import UserDashboard from './pages/User/UserDashboard'
-import ViewTaskDetails from './pages/User/ViewTaskDetails'
 import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import PrivateRoute from './routes/PrivateRoute'
@@ -34,16 +31,6 @@ const App = () => {
 
           </Route>
 
-          {/* user routes */}
-
-          <Route element={<PrivateRoute allowedRoles ={["admin"]} />}>
-
-            <Route path="/user/dashboard" element={<UserDashboard/>}/>
-            <Route path="/user/tasks" element={<MyTasks/>}/>
-            <Route path="/user/task-details/:id" element={<ViewTaskDetails/>}/>
-
-
-          </Route>
 {/* default route */}
             <Route path="/" element={<Root/>} />
         </Routes>
