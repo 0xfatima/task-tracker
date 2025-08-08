@@ -8,29 +8,50 @@ A full-stack task tracking application with user authentication, task management
 
 /frontend
 └── Task-Manager # Frontend React app (Vite)
+
 ├── components # Reusable UI components
+
 ├── context # Global state (auth, etc.)
+
 ├── hooks # Custom React hooks
+
 ├── pages # Auth, dashboard, etc.
+
 ├── routes # App routes
+
 ├── utils # Helper functions
+
 └── ... # Vite standard structure
 
 /backend
 ├── config/db.js # MongoDB connection
+
 ├── controllers/ # Business logic
+
 │ ├── authController.js
+
 │ └── taskController.js
+
 ├── middlewares/ # Custom Express middlewares
+
 │ ├── authMiddleware.js
+
 │ └── uploadMiddleware.js
+
 ├── models/ # Mongoose schemas
+
 │ ├── User.js
+
 │ └── Task.js
+
 ├── routes/ # Express routes
+
 │ ├── authRoutes.js
+
 │ └── taskRoutes.js
+
 ├── uploads/ # Stored image files
+
 └── server.js # Express server entry
 
 
