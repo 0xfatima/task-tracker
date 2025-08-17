@@ -49,7 +49,7 @@ setBarChartData(PriorityLevelData)
    const getDashboardData = async()=>{
     try{
       const response = await axiosInstance.get(
-        API_PATHS.TASKS.GET_DASHBOARD_DATA
+        API_PATHS.TASKS.GET_USER_DASHBOARD_DATA
       );
       if(response.data){
         setDashboardData(response.data)

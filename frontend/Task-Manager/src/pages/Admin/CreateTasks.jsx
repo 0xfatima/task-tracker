@@ -24,10 +24,10 @@ const CreateTasks = () => {
     dueDate:null,
     assignedTo:[],
     todoChecklist:[],
-    attachments:[],
+ 
   });
 
-  const [currentTask, setCurrentTask] = useState(null);
+  const [currentTask, setCurrentTask] = useState();
 
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false);
@@ -47,10 +47,10 @@ const CreateTasks = () => {
     title:"",
     description:"",
     priority:"Low",
-    dueDate:null,
-    assignedTo:[],
+    dueDate:"",
+    assignedTo:"",
     todoChecklist:[],
-    attachments:[],
+   
     })
   }
 

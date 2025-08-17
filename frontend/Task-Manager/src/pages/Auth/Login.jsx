@@ -38,13 +38,10 @@ const Login = () => {
       if(token){
         localStorage.setItem("token", token)
         updateUser(response.data)
-        //redirect based on role
+        
 
-      if(role==="admin"){
         navigate("/admin/dashboard")
-      }else{
-      navigate("/user/dashboard")
-      }
+      
       }
     }catch(error){
       if(error.response && error.response.data.message){

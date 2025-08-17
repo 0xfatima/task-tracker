@@ -14,17 +14,13 @@ const generateToken  = (userId) =>{
 
 const registerUser = async (req, res) => {
     try{
-        const {name, email, password, profleImageUrl, adminInviteToken} = req.body
+        const {name, email, password, profileImageUrl} = req.body
         //check if user already exists
         const userExists = await User.findOne({email});
         if(userExists){
             return res.status(400).json({message:"user alreasy exists"});
         }
 
-        //determine suer role: admin if correct token is provided, otherwise, member    
-        let role = "admin"
-
-        
 
         //hash password
         const salt = await bcrypt.genSalt(10);
@@ -33,7 +29,7 @@ const registerUser = async (req, res) => {
         //create new user
 
         const user= await User.create({
-            name, email, password: hashedPassword, profleImageUrl, role
+            name, email, password: hashedPassword, profileImageUrl
         })
 
         //return user data with jwt
@@ -41,8 +37,7 @@ const registerUser = async (req, res) => {
             _id: user.id,
             name: user.name,
             email:user.email,
-            role:user.role,
-            profleImageUrl:user.profleImageUrl,
+            profileImageUrl:user.profileImageUrl,
             token:generateToken(user._id)
         })
 
@@ -75,8 +70,8 @@ const loginUser = async (req, res) => {
             _id: user.id,
             name: user.name,
             email:user.email,
-            role:user.role,
-            profleImageUrl:user.profleImageUrl,
+            
+            profileImageUrl:user.profileImageUrl,
             token:generateToken(user._id)
         });
 
@@ -123,9 +118,8 @@ const updateUserProfile = async (req, res) => {
          res.json({
             _id: updatedUser.id,
             name: updatedUser.name,
-            email:updatedUser.email,
-            role:updatedUser.role,
-            profleImageUrl:updatedUser.profleImageUrl,
+            email:updatedUser.email,     
+            profileImageUrl:updatedUser.profileImageUrl,
             token:generateToken(updatedUser._id)
         });
 

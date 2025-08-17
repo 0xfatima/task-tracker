@@ -13,7 +13,7 @@ const Signup = () => {
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [adminInviteToken, setAdminInviteToken] = useState("")
+  // const [adminInviteToken, setAdminInviteToken] = useState("")
 
   const [error, setError] = useState(null)
 
@@ -54,7 +54,7 @@ const Signup = () => {
         email,
         password,
         profileImageUrl,
-        adminInviteToken
+
       });
 
       const {token, role}= response.data
@@ -62,13 +62,9 @@ const Signup = () => {
       if(token){
         localStorage.setItem("token", token)
         updateUser(response.data)
-        //redirect based on role
-
-      if(role==="admin"){
+        
         navigate("/admin/dashboard")
-      }else{
-      navigate("/user/dashboard")
-      }
+      
       }
     }catch(error){
       if(error.response && error.response.data.message){
@@ -113,12 +109,7 @@ const Signup = () => {
           type = "password"
           />
 
-          <Input value={adminInviteToken}
-          onChange={({target})=>setAdminInviteToken(target.value)}
-          label = "admin invite token"
-          placeholder = "6 characters"
-          type = "text"
-          />
+          
           
           </div>
           
