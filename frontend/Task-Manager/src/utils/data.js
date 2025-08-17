@@ -1,60 +1,42 @@
-import { LuLayoutDashboard, LuUsers, LuClipboardCheck, LuSquarePlus, LuLogOut } from "react-icons/lu";
+import { LuLayoutDashboard, LuClipboardCheck, LuSquarePlus, LuLogOut } from "react-icons/lu";
+import { FaRegEdit } from "react-icons/fa";
 
 export const SIDE_MENU_DATA= [
     {
         id:"01",
         label:"Dashboard",
         icon:LuLayoutDashboard,
-        path:'/admin/dashboard',
+        path:'/dashboard',
     },
     {
         id:"02",
-        label:"Manage Tasks",
-        icon:LuClipboardCheck,
-        path:'/admin/tasks',
+        label:"Edit Tasks",
+        icon:FaRegEdit,
+        path:'/edit/tasks',
     },
     {
         id:"03",
         label:"Create Tasks",
         icon:LuSquarePlus,
-        path:'/admin/create-task',
+        path:'/create-task',
     },
     {
         id:"04",
-        label:"Team members",
-        icon:LuUsers,
-        path:'/admin/users',
+        label:"Check Tasks",
+        icon:LuClipboardCheck,
+        path:'/update/tasks',
     },
     {
         id:"05",
         label:"Logout",
         icon:LuLogOut,
         path:'logout',
-    }
-]
-
-
-export const SIDE_MENU_USER_DATA= [
-    {
-        id:"01",
-        label:"Dashboard",
-        icon:LuLayoutDashboard,
-        path:'/user/dashboard',
-    },
-    {
-        id:"02",
-        label:"My Tasks",
-        icon:LuClipboardCheck,
-        path:'/user/tasks',
     },
     
-    {
-        id:"05",
-        label:"Logout",
-        icon:LuLogOut,
-        path:'logout',
-    }
 ]
+
+
+
 
 
 export const PRIORITY_DATA=[

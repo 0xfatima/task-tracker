@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
-import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from '../../utils/data'
+import { SIDE_MENU_DATA } from '../../utils/data'
 
 const SideMenu = ({activeMenu}) => {
     const {user, clearUser} = useContext(UserContext)
@@ -36,11 +36,6 @@ const SideMenu = ({activeMenu}) => {
                 <img src={user?.profileImageUrl||null} alt="profile image"
                 className='w-20 h-20 bg-slate-400 rounded-full' />
             </div>
-            {/* {user?.role === "admin" &&(
-                <div className='text-[10px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-1' >
-                    Admin
-                </div>
-            )} */}
             <h5 className='text-gray-950 font-medium leading-6 mt-3'>
                 {user?.name || ""}
             </h5>

@@ -83,7 +83,7 @@ const ViewTaskDetails = () => {
               </h2>
 
               <div className={`text-[11px] md:text-[13px] font-medium ${getStatusTagColor(task?.status)} px-4 py-0.5 rounded`}>
-
+                 {task?.status}
               </div>
             </div>
 
@@ -146,7 +146,7 @@ const TodoCheckList = ({text, isChecked, onChange})=>{
       className='w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none cursor-pointer'
 
       />
-      <p className='text-[13px] text-gray-800 '></p>
+      <p className='text-[13px] text-gray-800 '>{text}</p>
     </div>
   )
 }
