@@ -39,7 +39,7 @@ const ManageTasks = () => {
 
 
   const handleClick =(taskData) =>{
-    navigate(`/admin/create-task`, {state:{taskId:taskData._id}});
+    navigate(`/create-task`, {state:{taskId:taskData._id}});
   };
 
   useEffect(()=>{

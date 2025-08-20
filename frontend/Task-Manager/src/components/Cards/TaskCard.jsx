@@ -2,7 +2,6 @@ import React from 'react'
 import Progress from '../layouts/Progress'
 import moment from 'moment'
 
-
 const TaskCard = ({
             title,
             description,
@@ -15,7 +14,11 @@ const TaskCard = ({
             todoChecklist,
             onClick
 }) => {
-
+    
+    const currentDate = new Date();
+    const taskDueDate = new Date(dueDate)
+    const differenceInMS = taskDueDate - currentDate 
+    const differenceInDays = Math.ceil(differenceInMS/(1000*60*60*24))
     const getStatusTagColor = () =>{
         switch(status){
             case "In Progress":
@@ -39,7 +42,7 @@ const TaskCard = ({
     }
 
   return (
-    <div className='bg-white rounded-xl py-4 shadow-md shadow-gray-100 border border-gray-200/50 cursor-pointer'
+    <div className={` rounded-xl py-4 shadow-md shadow-gray-100 border border-gray-200/50 cursor-pointer ${differenceInDays<=3 &&  status!=='Completed'? 'bg-red-100':'bg-white'}`}
     onClick={onClick}>
         <div className='flex items-end gap-3 px-4'>
             <div className={`text-[11px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}>
