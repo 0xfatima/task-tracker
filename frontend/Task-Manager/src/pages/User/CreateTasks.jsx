@@ -11,8 +11,12 @@ import SelectDropdown from '../../components/Inputs/SelectDropdown'
 import TodoListInput from '../../components/Inputs/TodoListInput'
 import Modal from '../../components/layouts/Modals'
 import DeleteAlert from '../../components/layouts/DeleteAlert'
+
 const CreateTasks = () => {
 
+  const [llmLoading, setLLMLoading] = useState(false)
+  const [llmResponse, setLLMResponse] = useState([])
+  const [llmError, setLLMError] = useState("")
   const location = useLocation();
   const {taskId} = location.state || {}
   const navigate = useNavigate();
@@ -56,30 +60,34 @@ const CreateTasks = () => {
 
 
   //create Task
-  const createTask = async ()=>{
-    setLoading(true)
+const createTask = async () => {
+  setLoading(true)
 
-    try{
-      const todolist = taskData.todoChecklist?.map((item)=>({
-        text:item,
-        completed:false
-      }));
+  try {
+    const todolist = taskData.todoChecklist?.map((item) => ({
+      text: item,
+      completed: false
+    }));
 
-      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK,{
-        ...taskData,
-        dueDate: new Date(taskData.dueDate).toISOString(),
-        todoChecklist:todolist
-      });
-      toast.success("Task created successfully");
-      clearData();
-    }catch(error){
-      console.error("error craeting task", error)
-      setLoading(false)
-    }finally{
-      setLoading(false)
-    }
+    const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+      ...taskData,
+      dueDate: new Date(taskData.dueDate).toISOString(),
+      todoChecklist: todolist
+    });
 
+    toast.success("Task created successfully");
+    clearData();
+
+    // Reset AI suggestions
+    setLLMResponse([]);
+    setLLMError("");
+  } catch (error) {
+    console.error("error creating task", error)
+  } finally {
+    setLoading(false)
   }
+}
+
 
     //update Task
   const updateTask = async ()=>{
@@ -194,6 +202,37 @@ useEffect(()=>{
 },[taskId])
 
 
+
+const handleLLMResponse = async ()=>{
+  if(!taskData.description){
+    toast.error("please enter description first")
+  }
+  try{
+    setLLMLoading(true)
+    setLLMError("")
+    setLLMResponse("")
+
+    const response = await axiosInstance.post(API_PATHS.TASKS.GET_LLM_RESPONSE,{
+      description: taskData.description
+  })
+  console.log("resposne from llm",response);
+  
+  if(response.data.subtasks && Array.isArray(response.data.subtasks)){
+    setLLMResponse(response.data.subtasks)
+    toast.success("AI suggestions generated")
+  }else{
+    setLLMError("no response")
+  }
+  }catch(error){
+    console.error("Error fetching AI response:",error)
+    setLLMError("failed to fetch")
+  }finally{
+    setLLMLoading(false)
+  }
+  
+}
+
+
   return (
     <DashboardLayout activeMenu="Create Task">
       <div className='mt-5'>
@@ -228,6 +267,9 @@ useEffect(()=>{
                 handleValueChange("description", target.value)
               }
               ></textarea>
+
+
+
             </div>
 
             <div className='grid grid-cols-12 gap-4 mt-2'>
@@ -262,6 +304,19 @@ useEffect(()=>{
   <TodoListInput
   todoList = {taskData?.todoChecklist}
   setTodoList ={(value)=>handleValueChange("todoChecklist", value)}/>
+                <button onClick={handleLLMResponse} className='text-sm font-medium text-white bg-blue-500 p-2 cursor-pointer rounded-sm mt-1 hover:bg-blue-400'>{llmLoading?'generating...':'Use AI suggestions'}</button>
+{llmError && <p className="text-red-500 text-sm mt-2">{llmError}</p>}
+
+{llmResponse && llmResponse.length > 0 && (
+  <div className="mt-3">
+    <h4 className="font-semibold mb-2 text-sm text-slate-700">AI Suggested Subtasks:</h4>
+    <ul className="list-disc pl-5 text-sm text-slate-600">
+      {llmResponse.map((task, index) => (
+        <li key={index}>{task}</li>
+      ))}
+    </ul>
+  </div>
+)}
   
 </div>
 

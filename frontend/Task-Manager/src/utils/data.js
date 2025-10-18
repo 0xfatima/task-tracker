@@ -10,19 +10,20 @@ export const SIDE_MENU_DATA= [
     },
     {
         id:"02",
-        label:"Edit Tasks",
-        icon:FaRegEdit,
-        path:'/edit/tasks',
-    },
-    {
-        id:"03",
         label:"Create Tasks",
         icon:LuSquarePlus,
         path:'/create-task',
     },
     {
+        id:"03",
+        label:"Edit Tasks",
+        icon:FaRegEdit,
+        path:'/edit/tasks',
+    },
+    
+    {
         id:"04",
-        label:"Check Tasks",
+        label:"Update Todolist",
         icon:LuClipboardCheck,
         path:'/update/tasks',
     },

@@ -63,7 +63,7 @@ const Signup = () => {
         localStorage.setItem("token", token)
         updateUser(response.data)
         
-        navigate("/admin/dashboard")
+        navigate("/dashboard")
       
       }
     }catch(error){
@@ -79,9 +79,9 @@ const Signup = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'> Create an account</h3>
-        <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          join us by entering your details
+        <h3 className='text-xl font-semibold text-[#000B58]'> Create an account</h3>
+        <p className='text-xs text-[#000B58] mt-[5px] mb-6'>
+          Join us today!
         </p>
 
         <form action="" onSubmit={handleSignUp}>
@@ -91,7 +91,7 @@ const Signup = () => {
 
             <Input value={fullName}
           onChange={({target})=>setFullName(target.value)}
-          label = "full name"
+          label = "Full name"
           placeholder = "johndoe"
           type = "text"
           />
@@ -113,12 +113,12 @@ const Signup = () => {
           
           </div>
           
-          {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
+          {error && <p className='text-red-500 text-xs pb-2.5 '>{error}</p>}
 
-          <button type="submit" className='btn-primary'>
+          <button type="submit" className='btn-primary text-[#000B58] '>
             SignUp
           </button>
-          <p className='text-[13px] text-slate-800 mt-3'>
+          <p className='text-[13px] text-[#000B58]   mt-3'>
             Already have an account?{" "}
             <Link className='font-medium text-primary underline' to="/login">
             Login

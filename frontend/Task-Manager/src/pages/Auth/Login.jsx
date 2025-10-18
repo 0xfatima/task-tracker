@@ -40,7 +40,7 @@ const Login = () => {
         updateUser(response.data)
         
 
-        navigate("/admin/dashboard")
+        navigate("/dashboard")
       
       }
     }catch(error){
@@ -55,9 +55,9 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'> Welcome Back</h3>
+        <h3 className='text-xl font-semibold text-[#000B58]'> Welcome Back</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
-          please enter your details to login 
+          please enter your details to login!
         </p>
 
         <form action="" onSubmit={handleLogin}>
@@ -80,7 +80,7 @@ const Login = () => {
           <button type="submit" className='btn-primary'>
             LOGIN
           </button>
-          <p className='text-[13px] text-slate-800 mt-3'>
+          <p className='text-[13px] text-[#000B58] mt-3'>
             Don't have an account?{" "}
             <Link className='font-medium text-primary underline' to="/signup">
             SignUp

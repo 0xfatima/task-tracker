@@ -12,7 +12,9 @@ import InfoCard from '../../components/Cards/InfoCard'
 import CustomPieChart from '../../components/Charts/CustomPieChart'
 import CustomBarChart from '../../components/Charts/CustomBarChart'
 
-const COLORS = ["#8D51FF", "#00B8DB", "#7BCE00"]
+// const COLORS = ["#8D51FF", "#00B8DB", "#7BCE00"]
+const COLORS = ["#F59E0B", "#3B82F6", "#10B981"]
+
 
 const Dashboard = () => {
     useUserAuth()
@@ -71,7 +73,7 @@ setBarChartData(PriorityLevelData)
         <div>
           <div className='col-span-3'>
 {user && (
-  <h2 className='text-xl md:text-2xl'> Good Morning! {user.name}</h2>
+  <h2 className='text-xl md:text-2xl'> Hello {user.name}!</h2>
 )}            <p className='test-xs md:text-[13px] text-gray-400 mt-1.5'>
               {moment().format("dddd D MMM YYYY")}
             </p>
@@ -93,7 +95,7 @@ setBarChartData(PriorityLevelData)
             dashboardData?.charts?.taskDistribution?.Pending||0
           )}
 
-          color='bg-violet-500'
+          color='bg-[#F59E0B]'
           />
           <InfoCard
           label="In Progress Tasks"
@@ -101,7 +103,7 @@ setBarChartData(PriorityLevelData)
             dashboardData?.charts?.taskDistribution?.InProgress||0
           )}
 
-          color='bg-cyan-500'
+          color='bg-[#3B82F6]'
           />
           <InfoCard
           label="Completed Tasks"
@@ -109,7 +111,7 @@ setBarChartData(PriorityLevelData)
             dashboardData?.charts?.taskDistribution?.Completed||0
           )}
 
-          color='bg-lime-500'
+          color='bg-[#10B981]'
           />
 
         </div>
@@ -129,7 +131,7 @@ setBarChartData(PriorityLevelData)
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div className='card' style={{ height: 300 }}>
               <div className='flex items-center justify-between'>
                 <h5 className='font-medium'>
@@ -142,7 +144,7 @@ setBarChartData(PriorityLevelData)
               />
 
             </div>
-          </div>
+          </div> */}
 
       </div>
 </DashboardLayout>
