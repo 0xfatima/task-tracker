@@ -164,7 +164,7 @@ backend/
 git clone https://github.com/yourusername/task-manager.git
 cd task-manager
 ```
-## Backend Setup
+### 2. Backend Setup
 
 ```bash
 cd backend
@@ -174,7 +174,7 @@ npm run dev
 ``` 
 Backend server will run at: http://localhost:8000
 
-# Frontend Setup
+### 2. Frontend Setup
 ```bash
 cd frontend/Task-Manager
 npm install
