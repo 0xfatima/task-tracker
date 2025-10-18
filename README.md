@@ -163,41 +163,44 @@ backend/
 ```bash
 git clone https://github.com/yourusername/task-manager.git
 cd task-manager
+```
+## Backend Setup
 
-2. Backend Setup
-
+```bash
 cd backend
 cp .env.example .env  # Provide your own MongoDB URI and JWT secret
 npm install
 npm run dev
-
+``` 
 Backend server will run at: http://localhost:8000
 
-3. Frontend Setup
+# Frontend Setup
+```bash
 cd frontend/Task-Manager
 npm install
 npm run dev
-
+```
 
 Frontend server will run at: http://localhost:5173
 
-4. .env Example
+# .env Example
+
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
 JWT_SECRET=your_jwt_secret
 
-🛠 Tech Stack
+## Tech Stack
 
-Frontend: React, Vite, TailwindCSS (optional)
+### Frontend: React, Vite, TailwindCSS (optional)
 
-Backend: Node.js, Express
+### Backend: Node.js, Express
 
-Database: MongoDB
+### Database: MongoDB
 
-Authentication: JWT
+### Authentication: JWT
 
-AI Integration: Llama 3.1 via Groq AI
+### AI Integration: Llama 3.1 via Groq AI
 
-Email Notifications: NodeMailer
+### Email Notifications: NodeMailer
 
-Task Scheduling: Node Cron
+### Task Scheduling: Node Cron
