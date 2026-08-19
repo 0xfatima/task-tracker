@@ -110,6 +110,27 @@ A full-stack **Task Manager** application built with **MERN stack** to track tas
 - **User Authentication**: Secure login/signup with JWT tokens
 - **Inspirational Quotes**: Fetches daily motivational quotes on login and signup pages to keep users inspired.
 
+---
+
+## 📸 Screenshots
+
+### Login Page
+
+![Login Page](screenshots/login.png)
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Create Task
+
+![Create Task](screenshots/create-task.png)
+
+### My Tasks
+
+![My Tasks](screenshots/my-tasks.png)
+
+---
 
 ## 📁 Repository Structure
 
